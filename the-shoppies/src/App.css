@@ -1,38 +1,76 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #e1e1e1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 4rem;
 }
 
-.App-link {
-  color: #61dafb;
+.main__title {
+  padding-bottom: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search, .result__display, .result__added {
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 1px solid #afafaf;
+  background-color: #fafafa;
+  margin-bottom: 1rem;
 }
+
+.search__title, .result__title {
+  padding-bottom: 0.5rem;
+}
+
+.search__input {
+  background-image: url(./assets/logo/Icon-search.svg);
+  background-repeat: no-repeat;
+  background-position: 99%;
+  background-size: 16px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  outline: none;
+}
+
+.result {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.result__display, .result__added {
+  width: 43%;
+}
+
+.result__list {
+  margin-left: 2rem;
+  padding: 0.25rem;
+}
+
+.result__button {
+  padding: 0.25rem;
+  margin-left: 0.25rem;
+}
+/*# sourceMappingURL=App.css.map */

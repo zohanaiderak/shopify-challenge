@@ -1,0 +1,63 @@
+@import './styles/variables';
+
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background-color : $background-color;
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  padding: 4rem ;
+  &__title{
+    padding-bottom: 1rem;
+  }
+}
+
+.search{
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  border : 1px solid $bar-color;
+  background-color: $secondary-color;
+  margin-bottom: 1rem;
+  &__title{
+  padding-bottom: 0.5rem;  
+  }
+  &__input{
+    background-image: url(./assets/logo/Icon-search.svg);
+    background-repeat: no-repeat;
+    background-position: 99%;
+    background-size: 16px ;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+    outline: none;
+  }
+}
+
+.result{
+  display: flex;
+  justify-content: space-between;
+  &__display,&__added{
+    @extend .search;
+    width: 43%;
+  }
+  &__title{
+    @extend .search__title;
+  }
+  &__list{
+    margin-left: 2rem;
+    padding: 0.25rem;
+  }
+  &__button{
+    padding: 0.25rem;
+    margin-left: 0.25rem;
+  }
+
+}
