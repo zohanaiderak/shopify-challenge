@@ -27,7 +27,7 @@ class App extends React.Component {
   
   search = e => {
     let searchValue = e.target.value.toLowerCase();
-    axios.get(`http://www.omdbapi.com/?s=${searchValue}&apikey=cd817c84&`)
+    axios.get(`https://www.omdbapi.com/?s=${searchValue}&apikey=cd817c84&`)
          .then( res => {
               this.setState({
                 movie : res.data.Search,
