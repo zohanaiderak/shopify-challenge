@@ -15,12 +15,12 @@ class Results extends React.Component {
         return (
             <ul className = "result__list">
                 <li>
-                    {name}({year})
+                    { name }({ year })
                     <button 
-                        id = {id}
-                        onClick = {this.selected} 
-                        value = {`${name}(${year})`} 
-                        disabled = {disabled}
+                        id = { id }
+                        onClick = { this.selected } 
+                        value = { `${ name }(${ year })` } 
+                        disabled = { disabled }
                         className = "result__button"
                     > Nominate
                     </button>

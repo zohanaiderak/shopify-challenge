@@ -6,6 +6,8 @@ import AddedList from './components/addedList/addedList';
 import Banner from 'react-js-banner';
 import './App.scss';
 
+const API_key = process.env.API_key
+
 class App extends React.Component {
   state = {
     movie : [] ,
@@ -15,19 +17,19 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    if ( localStorage.getItem('List-of-Nominations') ) {
-      const nominatedList = JSON.parse( localStorage.getItem('List-of-Nominations') )
+    if( localStorage.getItem('List-of-Nominations') ) {
+      const nominatedList = JSON.parse( localStorage.getItem('List-of-Nominations') );
       this.setState({
         nominatedList : nominatedList
       })
     } else {
-      return null;
+        return null;
     }
   }
   
   search = e => {
     let searchValue = e.target.value.toLowerCase();
-    axios.get(`https://www.omdbapi.com/?s=${searchValue}&apikey=cd817c84&`)
+    axios.get(`https://www.omdbapi.com/?s=${searchValue}&apikey=${API_key}`)
          .then( res => {
               this.setState({
                 movie : res.data.Search,
@@ -39,92 +41,91 @@ class App extends React.Component {
           }) 
   }
 
-  removeNominatedMovie = (nominatedMovie) => {
+  removeNominatedMovie = ( nominatedMovie ) => {
     const newMovies = this.state.nominatedList.filter( item => item.id !== nominatedMovie.id );
-    localStorage.setItem('List-of-Nominations' , JSON.stringify(newMovies))
+    localStorage.setItem( 'List-of-Nominations' , JSON.stringify( newMovies ))
     this.setState({ nominatedList : newMovies })
   }
 
   selectNominatedMovie = ( nominatedmovie ) => {
-    if((this.state.nominatedList).length < 5){
+    if(( this.state.nominatedList ).length < 5){
         this.setState( state => {
-        const nominatedList = state.nominatedList.concat(nominatedmovie)
-        localStorage.setItem('List-of-Nominations' , JSON.stringify(nominatedList))
-          return {
-            nominatedList
-          }
+          const nominatedList = state.nominatedList.concat(nominatedmovie);
+          localStorage.setItem( 'List-of-Nominations' , JSON.stringify(nominatedList) )
+            return {
+              nominatedList
+            };
         })
     } else {
           alert( "Please select no more than 5 Nominees" );
-        }
+    }
   }
   
-  isMovieNominated = (movie) => {
+  isMovieNominated = ( movie ) => {
     const { nominatedList } = this.state;
-    return !!nominatedList.find(item => item.id === movie.imdbID)
+    return !!nominatedList.find( item => item.id === movie.imdbID );
   }
 
   result(){
     let result;
-    if(!this.state.movie){
-      result = <p>No Results Found</p>
-    }else{
-      console.log(this.state.nominatedList);
-      result = this.state.movie.map(movie=>{
-        if(this.isMovieNominated(movie)){
+    if( !this.state.movie ) {
+      result = <p>No Results Found</p>;
+    } else {
+      result = this.state.movie.map( movie => {
+        if( this.isMovieNominated( movie ) ){
           return(
             <Result
-            id={movie.imdbID}
-            name={movie.Title}
-            year={movie.Year}
-            disabled= {true}
-            onSelect = {this.selectNominatedMovie}
-            nominatedList = {this.state.nominatedList}
-          />)
-        }else{
-          return(
-            <Result
-            id={movie.imdbID}
-            name={movie.Title}
-            year={movie.Year}
-            disabled= {false}
-            onSelect = {this.selectNominatedMovie}
-            nominatedList = {this.state.nominatedList}
-          />)
+              id = { movie.imdbID }
+              name = { movie.Title }
+              year = { movie.Year }
+              disabled = { true }
+              onSelect = { this.selectNominatedMovie }
+              nominatedList = { this.state.nominatedList }
+          />);
+        } else {
+            return(
+              <Result
+                id = { movie.imdbID }
+                name = { movie.Title }
+                year = { movie.Year }
+                disabled = { false }
+                onSelect = { this.selectNominatedMovie }
+                nominatedList = { this.state.nominatedList }
+            />);
         }
-    })
+      });
     }
-    return result
+    return result;
   }
 
-  list(){
+  list () {
     let list;
-    if(!this.state.nominatedList){
-      list = <p>No Nominated Movie</p>
-    }else{
-      list= this.state.nominatedList.map(movie=>{
-        return(
-          <AddedList
-            id = {movie.id}
-            name={movie.name}
-            onRemove = {() => this.removeNominatedMovie(movie)}
-          />
-        )
-      })
+    if( !this.state.nominatedList ) {
+      list = <p>No Nominated Movie</p>;
+    } else {
+        list= this.state.nominatedList.map(movie=>{
+          return(
+            <AddedList
+              id = {movie.id}
+              name={movie.name}
+              onRemove = {() => this.removeNominatedMovie(movie)}
+            />
+          );
+        })
     }
-    return list
+    return list;
   }
 
   banner = () => {
-    if((this.state.nominatedList).length === 5 ){
+    if(( this.state.nominatedList).length === 5 ) {
       return (
         <Banner
           title = "You have selected your nominations"
-          css={this.state.banner3Css}
+          css = { this.state.banner3Css }
         />
-      )
+      );
     } else {
-      return null;
+        return null;
     }
   }
 

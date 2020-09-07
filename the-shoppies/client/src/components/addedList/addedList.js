@@ -15,10 +15,10 @@ class AddedList extends React.Component{
         return (
                 <ul className = "result__list" >
                     <li>
-                        {name}
+                        { name }
                         <button 
-                            onClick={this.removed}
-                            value={name}
+                            onClick = { this.removed }
+                            value = { name }
                             className = "result__button"
                         > Remove
                         </button>
