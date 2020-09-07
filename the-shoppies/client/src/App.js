@@ -6,7 +6,7 @@ import AddedList from './components/addedList/addedList';
 import Banner from 'react-js-banner';
 import './App.scss';
 
-const API_key = process.env.API_key
+const API_KEY = process.env.API_KEY;
 
 class App extends React.Component {
   state = {
@@ -29,7 +29,7 @@ class App extends React.Component {
   
   search = e => {
     let searchValue = e.target.value.toLowerCase();
-    axios.get(`https://www.omdbapi.com/?s=${searchValue}&apikey=${API_key}`)
+    axios.get(`https://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`)
          .then( res => {
               this.setState({
                 movie : res.data.Search,
